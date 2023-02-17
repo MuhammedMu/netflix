@@ -14,12 +14,12 @@ function App() {
       <Rows
         title="NETFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginals}
-        isLarge={false}
+        isLarge={true}
       />
       <Rows
         title="Trending Now"
         fetchUrl={requests.fetchTrending}
-        isLarge={true}
+        isLarge={false}
       />
 
       <Rows
