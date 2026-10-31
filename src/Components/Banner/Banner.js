@@ -11,11 +11,11 @@ function Banner() {
 
     const [trailerUrl, setTrailerUrl] = useState("");
 
-    // console.log(requests.fetchNetflixOriginals);
+    // console.log(requests.fetchFeaturedSeries);
 
     useEffect(() => {
       axios
-        .get(requests.fetchNetflixOriginals)
+        .get(requests.fetchFeaturedSeries)
         .then((request) => {
           // pick a random title that has a backdrop image
           const withImage = (request?.data?.results || []).filter(

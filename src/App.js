@@ -13,8 +13,8 @@ function App() {
       <Banner />
 
       <Rows
-        title="NETFLIX ORIGINALS"
-        fetchUrl={requests.fetchNetflixOriginals}
+        title="FEATURED SERIES"
+        fetchUrl={requests.fetchFeaturedSeries}
         isLarge={true}
       />
       <Rows
