@@ -4,6 +4,7 @@ import axios from "../../axios";
 import requests from "../../requests";
 import Youtube from "react-youtube";
 import movieTrailer from "movie-trailer";
+// import ReactPlayer from "react-player";
 
 function Banner() {
     const [movies, setMovies] = useState([]);
@@ -13,14 +14,27 @@ function Banner() {
     // console.log(requests.fetchNetflixOriginals);
 
     useEffect(() => {
-      axios.get(requests.fetchNetflixOriginals).then((request) => {
-        setMovies(request?.data.results[Math.floor(Math.random() * 10 + 1)]);
-      });
+      axios
+        .get(requests.fetchNetflixOriginals)
+        .then((request) => {
+          // pick a random title that has a backdrop image
+          const withImage = (request?.data?.results || []).filter(
+            (m) => m.backdrop_path
+          );
+          if (withImage.length) {
+            setMovies(withImage[Math.floor(Math.random() * withImage.length)]);
+          }
+        })
+        .catch((err) => console.log("Could not load banner:", err.message));
     }, []);
 
     function truncate(str, n) {
       return str?.length > n ? str.substr(0, n - 1) + "..." : str;
-    }
+  }
+  
+  // for (let i = 0; i <= 20; i++){
+  //   console.log(movies);
+  // }
 
     const handleClick = (movie) => {
       if (trailerUrl) {
@@ -56,10 +70,22 @@ function Banner() {
         className="banner"
         style={{
           backgroundSize: "cover",
-          backgroundImage: `url("https://image.tmdb.org/t/p/original/${movies?.backdrop_path}")`,
+          backgroundImage: movies?.backdrop_path
+            ? `url("https://image.tmdb.org/t/p/original/${movies.backdrop_path}")`
+            : "none",
           backgroundPosition: "center center",
         }}
       >
+        {/* <ReactPlayer
+          playing={true}
+          loop={true}
+          width="100%"
+          height="100%"
+          volume={1}
+          muted={true}
+          className="header__video"
+          url="https://vimeo.com/384025132"
+        /> */}
         <div className="all-wraper">
           <div>
             <h1 className="title">

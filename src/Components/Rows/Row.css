@@ -1,18 +1,21 @@
 
 
 .row__poster {
-    width: 100%;
+    width: 301px;
     object-fit: contain;
-    max-height: 120px;
+    /* max-height: 120px; */
     transition: transform 450ms;
     margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 .row__posters{
     display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
-    padding: 20px;
+    
+    /* padding: 20px; */
 }
 
 .row__posters::-webkit-scrollbar{
@@ -20,20 +23,30 @@
 }
 
 .row__poster:hover{
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 .big__poster{
-    width: 100%;
+    width: 300px;
     object-fit: contain;
-    max-height: 250px;
+    /* max-height: 250px; */
+    border-radius: 5px;
     transition: transform 450ms;
     margin-right: 10px;
+    margin-top: 10px;
 }
 
 .big__poster:hover{
     transform: scale(1.09);
 }
+
+.poster_title{
+    margin: 20px 0 20px 20px;
+    font-size: 24px;
+}
 h1{
     font-size: 22px;
+}
+h3{
+    text-align: left;
 }
