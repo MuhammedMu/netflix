@@ -1,5 +1,6 @@
 import './App.css';
 import Banner from './Components/Banner/Banner';
+import Footer from './Components/Footer/Footer';
 import Nav from './Components/Nav/Nav';
 import Rows from './Components/Rows/Rows';
 import requests from './requests';
@@ -52,6 +53,7 @@ function App() {
         fetchUrl={requests.fetchDocumentaries}
         isLarge={false}
       />
+      <Footer />
     </div>
   );
 }

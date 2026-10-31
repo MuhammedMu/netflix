@@ -46,3 +46,9 @@
 .App{
   background-color: #111;
 }
+
+
+/* The original Netflix Sans font is proprietary and is not included in this repo. */
+body{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

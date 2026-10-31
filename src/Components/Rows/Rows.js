@@ -27,23 +27,25 @@ function Row({ title, fetchUrl, isLarge }) {
     // }
     // fetchData()
 
-    axios.get(fetchUrl).then((request) => {
-      // console.log(request)
-      setMovies(request.data.results);
-    });
-  }, [title, fetchUrl]);
+    axios
+      .get(fetchUrl)
+      .then((request) => {
+        // skip titles with no artwork (they would request ".../null")
+        setMovies(
+          (request.data.results || []).filter((m) =>
+            isLarge ? m.poster_path : m.backdrop_path
+          )
+        );
+      })
+      .catch((err) => console.log("Could not load row:", title, err.message));
+  }, [title, fetchUrl, isLarge]);
 
   // use effect for movie name
    useEffect(() => {
-     window.addEventListener("scroll", () => {
-       if (window.scrollY > 100) {
-         setName(true);
-       } else {
-         setName(false);
-       }
-     });
+     const onScroll = () => setName(window.scrollY > 100);
+     window.addEventListener("scroll", onScroll);
      return () => {
-       window.removeEventListener("scroll");
+       window.removeEventListener("scroll", onScroll);
      };
    }, []);
 
@@ -91,7 +93,7 @@ function Row({ title, fetchUrl, isLarge }) {
 
   return (
     <div className="row">
-      <h3>{title} </h3>
+      <h3 className="poster_title">{title} </h3>
       <div className="row__posters">
         {movies.map((movie, index) => {
           if (isLarge === true) {
@@ -111,7 +113,7 @@ function Row({ title, fetchUrl, isLarge }) {
               src={`${imgUrl}${
                 isLarge ? movie.poster_path : movie.backdrop_path
               }`}
-              alt={movie.name}
+              alt={movie.title || movie.name || movie.original_name}
             />
           );
           return data;
@@ -119,13 +121,13 @@ function Row({ title, fetchUrl, isLarge }) {
       </div>
 
       {/* jsx for showing name when clicked  */}
-      <h1 style={{ padding: "40px" }}>
+      <h1 style={{ padding: "10px" }}>
       {showName && <p>{showName}</p>}
       {/* <p>{ showName}</p> */}
       {/* {console.log(showName)} */}
       </h1>
 
-      <div style={{ padding: "20px" }}>
+      <div style={{ padding: "10px" }}>
         {trailerUrl && <Youtube videoId={trailerUrl} opts={opts} />}
       </div>
     </div>
