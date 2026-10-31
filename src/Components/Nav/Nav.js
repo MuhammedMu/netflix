@@ -19,7 +19,7 @@ function Nav() {
 
   return (
     <div className={`nav ${show && "nav__black"}`}>
-      <img className="nav__logo" src={logo} alt="Netflix Logo" />
+      <img className="nav__logo" src={logo} alt="StreamBox logo" />
 
       {/* <div ></div> */}
 
